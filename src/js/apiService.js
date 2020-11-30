@@ -15,10 +15,15 @@ export default class PixabayService {
     }
 
     async fetchPhotos() {
-        const request = `/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=15&key=${API_KEY}`
+        try {
+            const request = `/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=15&key=${API_KEY}`
         const response = await fetch(BASE_URL + request);
         const newResponse = await response.json();
         return newResponse.hits;
+        } catch (error) {
+            alert(error);
+            console.log(error);
+        }       
     }
 
     resetPage() {
